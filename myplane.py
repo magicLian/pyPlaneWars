@@ -18,14 +18,9 @@ class MyPlane(pygame.sprite.Sprite):
             pygame.image.load(GlobalVar.PROJECT_PATH + '/images/me_destroy_4.png').convert_alpha()
         ])
         self.rect = self.image1.get_rect()
-        self.width = self.rect.width
-        self.height = self.rect.height
-        self.active = True
-        self.invincible = False
         self.mask = pygame.mask.from_surface(self.image2)
-        self.rect.left = (GlobalVar.SYSTEM_SCREEN_WIDTH - self.rect.width) // 2
-        self.rect.top = GlobalVar.SYSTEM_SCREEN_HEIGHT - self.rect.height - GlobalVar.ME_BOTTOM_REMAINING
         self.speed = GlobalVar.ME_SPEED
+        self.reset()
 
     def moveUp(self):
         if self.rect.top > 0:
@@ -34,7 +29,7 @@ class MyPlane(pygame.sprite.Sprite):
             self.rect.top = 0
 
     def moveDown(self):
-        if self.rect.bottom < GlobalVar.SYSTEM_SCREEN_HEIGHT - self.height - GlobalVar.ME_BOTTOM_REMAINING:
+        if self.rect.bottom < GlobalVar.SYSTEM_SCREEN_HEIGHT - self.rect.height - GlobalVar.ME_BOTTOM_REMAINING:
             self.rect.bottom += self.speed
         else:
             self.rect.bottom = GlobalVar.SYSTEM_SCREEN_HEIGHT - GlobalVar.ME_BOTTOM_REMAINING
@@ -53,8 +48,6 @@ class MyPlane(pygame.sprite.Sprite):
 
     def reset(self):
         self.rect.left = (GlobalVar.SYSTEM_SCREEN_WIDTH - self.rect.width) // 2
-        self.rect.right = self.rect.left + self.rect.width
         self.rect.top = GlobalVar.SYSTEM_SCREEN_HEIGHT - self.rect.height - GlobalVar.ME_BOTTOM_REMAINING
-        self.rect.bottom = self.rect.top + self.rect.height
         self.active = True
         self.invincible = True
