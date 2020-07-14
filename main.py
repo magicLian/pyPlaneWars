@@ -12,21 +12,21 @@ from random import *
 
 def add_small_enemies(group1, group2, num):
     for i in range(num):
-        e1 = enemy.SmallEnemy((GlobalVar.SYSTEM_SCREEN_WIDTH,GlobalVar.SYSTEM_SCREEN_HEIGHT))
+        e1 = enemy.SmallEnemy()
         group1.add(e1)
         group2.add(e1)
 
 
 def add_mid_enemies(group1, group2, num):
     for i in range(num):
-        e2 = enemy.MidEnemy((GlobalVar.SYSTEM_SCREEN_WIDTH,GlobalVar.SYSTEM_SCREEN_HEIGHT))
+        e2 = enemy.MidEnemy()
         group1.add(e2)
         group2.add(e2)
 
 
 def add_big_enemies(group1, group2, num):
     for i in range(num):
-        e3 = enemy.BigEnemy((GlobalVar.SYSTEM_SCREEN_WIDTH,GlobalVar.SYSTEM_SCREEN_HEIGHT))
+        e3 = enemy.BigEnemy()
         group1.add(e3)
         group2.add(e3)
 
@@ -152,8 +152,8 @@ def main():
     bomb_num = GlobalVar.SYSTEM_BOMB_NUMBER
 
     # 每30秒发放一个补给包
-    bullet_supply = supply.BulletSupply((GlobalVar.SYSTEM_SCREEN_WIDTH, GlobalVar.SYSTEM_SCREEN_HEIGHT))
-    bomb_supply = supply.Bomb_Supply((GlobalVar.SYSTEM_SCREEN_WIDTH, GlobalVar.SYSTEM_SCREEN_HEIGHT))
+    bullet_supply = supply.BulletSupply()
+    bomb_supply = supply.Bomb_Supply()
 
     supply_time = USEREVENT
     pygame.time.set_timer(supply_time, GlobalVar.SYSTEM_SUPPLY_TIME)
@@ -353,10 +353,7 @@ def main():
                     if enemy_hit:
                         b.active = False
                         for each in enemy_hit:
-                            each.hit = True
-                            each.energy -= 1
-                            if each.energy == 0:
-                                each.active = False
+                            each.hit_for_one()
 
             # 绘制敌方大型机
             for each in big_enemies:

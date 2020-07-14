@@ -17,6 +17,8 @@ class GlobalVar():
     ME_SPEED = 10
     ME_BOTTOM_REMAINING = 30
 
+    SUPPLY_SPEED = 5
+
     FONT_SCORE_SIZE = 36
     FONT_BOMB_SIZE = 48
     FONT_GAME_OVER_SIZE = 48
