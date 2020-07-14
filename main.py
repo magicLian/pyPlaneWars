@@ -5,80 +5,28 @@ import myplane
 import enemy
 import bullet
 import supply
+import consts
 from pygame.locals import *
 from random import *
-import consts
-
-pygame.init()
-pygame.mixer.init()
-
-bg_size = width, height = consts.globalMap["screenWidth"], consts.globalMap["screenHeight"]
-screen = pygame.display.set_mode(bg_size)
-pygame.display.set_caption('飞机大战 -- Demo')
-
-background = pygame.image.load(consts.globalMap["projectPath"] + '/images/background.png').convert()
-
-# 定义颜色
-BLACK = (0, 0, 0)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-WHITE = (255, 255, 255)
-
-# 载入音乐
-pygame.mixer.music.load(consts.globalMap["projectPath"] + '/sound/game_music.ogg')
-pygame.mixer.music.set_volume(0.2)
-
-bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/bullet.wav')
-bullet_sound.set_volume(0.2)
-
-bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/use_bomb.wav')
-bomb_sound.set_volume(0.2)
-
-supply_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/supply.wav')
-supply_sound.set_volume(0.2)
-
-get_bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bomb.wav')
-get_bomb_sound.set_volume(0.2)
-
-get_bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bullet.wav')
-get_bullet_sound.set_volume(0.2)
-
-upgrade_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/upgrade.wav')
-upgrade_sound.set_volume(0.2)
-
-enemy3_fly_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_flying.wav')
-enemy3_fly_sound.set_volume(0.6)
-
-enemy1_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy1_down.wav')
-enemy1_down_sound.set_volume(0.2)
-
-enemy2_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy2_down.wav')
-enemy2_down_sound.set_volume(0.2)
-
-enemy3_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_down.wav')
-enemy3_down_sound.set_volume(0.2)
-
-me_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/me_down.wav')
-me_down_sound.set_volume(0.2)
 
 
 def add_small_enemies(group1, group2, num):
     for i in range(num):
-        e1 = enemy.SmallEnemy(bg_size)
+        e1 = enemy.SmallEnemy(consts.globalMap["screenWH"])
         group1.add(e1)
         group2.add(e1)
 
 
 def add_mid_enemies(group1, group2, num):
     for i in range(num):
-        e2 = enemy.MidEnemy(bg_size)
+        e2 = enemy.MidEnemy(consts.globalMap["screenWH"])
         group1.add(e2)
         group2.add(e2)
 
 
 def add_big_enemies(group1, group2, num):
     for i in range(num):
-        e3 = enemy.BigEnemy(bg_size)
+        e3 = enemy.BigEnemy(consts.globalMap["screenWH"])
         group1.add(e3)
         group2.add(e3)
 
@@ -89,11 +37,56 @@ def inc_speed(target, inc):
 
 
 def main():
+    pygame.init()
+    pygame.mixer.init()
+
+    screen = pygame.display.set_mode(consts.globalMap["screenWH"])
+    pygame.display.set_caption(consts.globalMap["gameName"])
+
+    background = pygame.image.load(consts.globalMap["projectPath"] + '/images/background.png').convert()
+
+    # 载入音乐
+    pygame.mixer.music.load(consts.globalMap["projectPath"] + '/sound/game_music.ogg')
+    pygame.mixer.music.set_volume(consts.globalMap["musicVol"])
+
+    bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/bullet.wav')
+    bullet_sound.set_volume(consts.globalMap["musicVol"])
+
+    bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/use_bomb.wav')
+    bomb_sound.set_volume(consts.globalMap["musicVol"])
+
+    supply_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/supply.wav')
+    supply_sound.set_volume(consts.globalMap["musicVol"])
+
+    get_bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bomb.wav')
+    get_bomb_sound.set_volume(consts.globalMap["musicVol"])
+
+    get_bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bullet.wav')
+    get_bullet_sound.set_volume(consts.globalMap["musicVol"])
+
+    upgrade_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/upgrade.wav')
+    upgrade_sound.set_volume(consts.globalMap["musicVol"])
+
+    enemy3_fly_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_flying.wav')
+    enemy3_fly_sound.set_volume(consts.globalMap["musicVol"])
+
+    enemy1_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy1_down.wav')
+    enemy1_down_sound.set_volume(consts.globalMap["musicVol"])
+
+    enemy2_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy2_down.wav')
+    enemy2_down_sound.set_volume(consts.globalMap["musicVol"])
+
+    enemy3_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_down.wav')
+    enemy3_down_sound.set_volume(consts.globalMap["musicVol"])
+
+    me_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/me_down.wav')
+    me_down_sound.set_volume(consts.globalMap["musicVol"])
+
     # 播放音乐
     pygame.mixer.music.play(-1)
 
     # 实例我方飞机
-    me = myplane.MyPlane(bg_size=bg_size)
+    me = myplane.MyPlane(consts.globalMap["screenWH"])
 
     # 实例敌方飞机
     enemies = pygame.sprite.Group()
@@ -113,15 +106,15 @@ def main():
     # 实例普通子弹
     bullet1 = []
     bullet1_index = 0
-    BULLET1_NUM = 4
-    for i in range(BULLET1_NUM):
+    bullet1_num = 4
+    for i in range(bullet1_num):
         bullet1.append(bullet.Bullet1(me.rect.midtop))
 
     # 实例超级子弹
     bullet2 = []
     bullet2_index = 0
-    BULLET2_NUM = 8
-    for i in range(BULLET2_NUM // 2):
+    bullet2_num = 8
+    for i in range(bullet2_num // 2):
         bullet2.append(bullet.Bullet2((me.rect.centerx - 33, me.rect.centery)))
         bullet2.append(bullet.Bullet2((me.rect.centerx + 30, me.rect.centery)))
 
@@ -133,7 +126,7 @@ def main():
 
     # 统计得分
     score = 0
-    score_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", 36)
+    score_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", consts.globalMap["scoreFontSize"])
 
     # 标志是否暂停游戏
     paused = False
@@ -146,30 +139,30 @@ def main():
     resume_pressed_image = pygame.image.load(
         consts.globalMap["projectPath"] + '/images/resume_pressed.png').convert_alpha()
     paused_rect = paused_nor_image.get_rect()
-    paused_rect.left, paused_rect.top = width - paused_rect.width - 10, 10
+    paused_rect.left, paused_rect.top = consts.globalMap["screenWH"][0] - paused_rect.width - 10, 10
     paused_image = paused_nor_image
 
     # 设置难度
-    level = 1
+    level = consts.LEVEL1
 
     # 全屏炸弹
     bomb_image = pygame.image.load(consts.globalMap["projectPath"] + '/images/bomb.png').convert_alpha()
     bomb_rect = bomb_image.get_rect()
-    bomb_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", 48)
-    bomb_num = 3
+    bomb_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", consts.globalMap["bombFontSize"])
+    bomb_num = consts.globalMap["bombNum"]
 
     # 每30秒发放一个补给包
-    bullet_supply = supply.BulletSupply(bg_size)
-    bomb_supply = supply.Bomb_Supply(bg_size)
+    bullet_supply = supply.BulletSupply((consts.globalMap["screenWH"][0], consts.globalMap["screenWH"][1]))
+    bomb_supply = supply.Bomb_Supply((consts.globalMap["screenWH"][0], consts.globalMap["screenWH"][1]))
 
-    SUPPLY_TIME = USEREVENT
-    pygame.time.set_timer(SUPPLY_TIME, 30 * 1000)
+    supply_time = USEREVENT
+    pygame.time.set_timer(supply_time, consts.globalMap["supplyTimer"])
 
     # 超级子弹定时器
-    DOUBLE_BULLTET_TIME = USEREVENT + 1
+    double_bullet_time = USEREVENT + 1
 
     # 解除我方重生无敌定时器
-    INVINCIBLE_TIME = USEREVENT + 2
+    invincible_time = USEREVENT + 2
 
     # 标志是否使用超级子弹
     is_double_bullet = False
@@ -177,20 +170,20 @@ def main():
     # 生命数量
     life_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/life.png").convert_alpha()
     life_rect = life_image.get_rect()
-    life_num = 3
+    life_num = consts.globalMap["lifeNum"]
 
     # 用于切换我方飞机图片
     switch_plane = True
 
     # 游戏结束画面
-    gameover_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.TTF", 48)
+    gameover_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.TTF", consts.globalMap["gameOverFontSize"])
     again_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/again.png").convert_alpha()
     again_rect = again_image.get_rect()
     gameover_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/gameover.png").convert_alpha()
     gameover_rect = gameover_image.get_rect()
 
     # 用于延迟切换
-    delay = 100
+    delay = consts.globalMap["delay"]
 
     # 限制打开一次记录文件
     recorded = False
@@ -208,11 +201,11 @@ def main():
                 if event.button == 1 and paused_rect.collidepoint(event.pos):
                     paused = not paused
                     if paused:
-                        pygame.time.set_timer(SUPPLY_TIME, 0)
+                        pygame.time.set_timer(supply_time, 0)
                         pygame.mixer.music.pause()
                         pygame.mixer.pause()
                     else:
-                        pygame.time.set_timer(SUPPLY_TIME, 30 * 1000)
+                        pygame.time.set_timer(supply_time, consts.globalMap["supplyTimer"])
                         pygame.mixer.music.unpause()
                         pygame.mixer.unpause()
 
@@ -235,24 +228,24 @@ def main():
                         for each in enemies:
                             if each.rect.bottom > 0:
                                 each.active = False
-            elif event.type == SUPPLY_TIME:
+            elif event.type == supply_time:
                 supply_sound.play()
                 if choice([True, False]):
                     bomb_supply.reset()
                 else:
                     bullet_supply.reset()
 
-            elif event.type == DOUBLE_BULLTET_TIME:
+            elif event.type == double_bullet_time:
                 is_double_bullet = False
-                pygame.time.set_timer(DOUBLE_BULLTET_TIME, 0)
+                pygame.time.set_timer(double_bullet_time, 0)
 
-            elif event.type == INVINCIBLE_TIME:
+            elif event.type == invincible_time:
                 me.invincible = False
-                pygame.time.set_timer(INVINCIBLE_TIME, 0)
+                pygame.time.set_timer(invincible_time, 0)
 
         # 根据用户得分增加难度
-        if level == 1 and score > 50000:
-            level = 2
+        if level == consts.LEVEL1 and score > 50000:
+            level = consts.LEVEL2
             upgrade_sound.play()
             # 增加3架小型敌机, 2架中型敌机和1架大型敌机
             add_small_enemies(small_enemies, enemies, 3)
@@ -262,8 +255,8 @@ def main():
             # 提升小型敌机的速度
             inc_speed(target=small_enemies, inc=1)
 
-        elif level == 2 and score > 300000:
-            level = 3
+        elif level == consts.LEVEL2 and score > 300000:
+            level = consts.LEVEL3
             upgrade_sound.play()
             # 增加5架小型敌机, 3架中型敌机和2架大型敌机
             add_small_enemies(small_enemies, enemies, 5)
@@ -274,8 +267,8 @@ def main():
             inc_speed(target=small_enemies, inc=1)
             inc_speed(target=mid_enemies, inc=1)
 
-        elif level == 3 and score > 600000:
-            level = 4
+        elif level == consts.LEVEL3 and score > 600000:
+            level = consts.LEVEL4
             upgrade_sound.play()
             # 增加5架小型敌机, 3架中型敌机和2架大型敌机
             add_small_enemies(small_enemies, enemies, 5)
@@ -286,8 +279,8 @@ def main():
             inc_speed(target=small_enemies, inc=1)
             inc_speed(target=mid_enemies, inc=1)
 
-        elif level == 4 and score > 1000000:
-            level = 5
+        elif level == consts.LEVEL4 and score > 1000000:
+            level = consts.LEVEL5
             upgrade_sound.play()
             # 增加5架小型敌机, 3架中型敌机和2架大型敌机
             add_small_enemies(small_enemies, enemies, 5)
@@ -332,7 +325,7 @@ def main():
                     get_bullet_sound.play()
                     # 发射超级子弹
                     is_double_bullet = True
-                    pygame.time.set_timer(DOUBLE_BULLTET_TIME, 18 * 1000)
+                    pygame.time.set_timer(double_bullet_time, 18 * 1000)
                     bullet_supply.active = False
 
             # 发射子弹
@@ -344,11 +337,11 @@ def main():
                         (me.rect.centerx - 33, me.rect.centery))
                     bullets[bullet2_index +
                             1].reset((me.rect.centerx + 30, me.rect.centery))
-                    bullet2_index = (bullet2_index + 2) % BULLET2_NUM
+                    bullet2_index = (bullet2_index + 2) % bullet2_num
                 else:
                     bullets = bullet1
                     bullets[bullet1_index].reset(me.rect.midtop)
-                    bullet1_index = (bullet1_index + 1) % BULLET1_NUM
+                    bullet1_index = (bullet1_index + 1) % bullet1_num
 
             # 检测子弹是否击中敌机
             for b in bullets:
@@ -379,7 +372,7 @@ def main():
                             screen.blit(each.image2, each.rect)
 
                     # 绘制血槽
-                    pygame.draw.line(screen, BLACK,
+                    pygame.draw.line(screen, consts.BLACK,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.right, each.rect.top - 5),
                                      2)
@@ -387,9 +380,9 @@ def main():
                     # 当生命大于20%显示绿色, 否则显示红色
                     energy_remain = each.energy / enemy.BigEnemy.energy
                     if energy_remain > 0.2:
-                        energy_color = GREEN
+                        energy_color = consts.GREEN
                     else:
-                        energy_color = RED
+                        energy_color = consts.RED
                     pygame.draw.line(screen, energy_color,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.left + each.rect.width * energy_remain,
@@ -428,7 +421,7 @@ def main():
                         screen.blit(each.image, each.rect)
 
                     # 绘制血槽
-                    pygame.draw.line(screen, BLACK,
+                    pygame.draw.line(screen, consts.BLACK,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.right, each.rect.top - 5),
                                      2)
@@ -436,9 +429,9 @@ def main():
                     # 当生命大于20%显示绿色, 否则显示红色
                     energy_remain = each.energy / enemy.MidEnemy.energy
                     if energy_remain > 0.2:
-                        energy_color = GREEN
+                        energy_color = consts.GREEN
                     else:
-                        energy_color = RED
+                        energy_color = consts.RED
                     pygame.draw.line(screen, energy_color,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.left + each.rect.width * energy_remain,
@@ -497,23 +490,23 @@ def main():
                     if me_destroy_index == 0:
                         life_num -= 1
                         me.reset()
-                        pygame.time.set_timer(INVINCIBLE_TIME, 3 * 1000)
+                        pygame.time.set_timer(invincible_time, 3 * 1000)
 
             # 绘制全屏炸弹数量
-            bomb_text = bomb_font.render("× %d" % bomb_num, True, WHITE)
+            bomb_text = bomb_font.render("× %d" % bomb_num, True, consts.WHITE)
             text_rect = bomb_text.get_rect()
-            screen.blit(bomb_image, (10, height - 10 - bomb_rect.height))
+            screen.blit(bomb_image, (10, consts.globalMap["screenWH"][1] - 10 - bomb_rect.height))
             screen.blit(bomb_text, (20 + bomb_rect.width,
-                                    height - 5 - text_rect.height))
+                                    consts.globalMap["screenWH"][1] - 5 - text_rect.height))
 
             # 绘制剩余生命数量
             if life_num:
                 for i in range(life_num):
                     screen.blit(life_image,
-                                ((width - 10 - (i + 1) * life_rect.width),
-                                 height - 10 - life_rect.height))
+                                ((consts.globalMap["screenWH"][0] - 10 - (i + 1) * life_rect.width),
+                                 consts.globalMap["screenWH"][1] - 10 - life_rect.height))
             # 绘制得分
-            score_text = score_font.render('Score : %d' % score, True, WHITE)
+            score_text = score_font.render('Score : %d' % score, True, consts.WHITE)
             screen.blit(score_text, (10, 5))
 
         #  绘制游戏结束画面
@@ -525,7 +518,7 @@ def main():
             pygame.mixer.stop()
 
             # 停止发放补给
-            pygame.time.set_timer(SUPPLY_TIME, 0)
+            pygame.time.set_timer(supply_time, 0)
 
             if not recorded:
                 recorded = True
@@ -545,23 +538,24 @@ def main():
             gameover_text1 = gameover_font.render("Your Score", True, (255, 255, 255))
             gameover_text1_rect = gameover_text1.get_rect()
             gameover_text1_rect.left, gameover_text1_rect.top = \
-                (width - gameover_text1_rect.width) // 2, height // 3
+                (consts.globalMap["screenWH"][0] - gameover_text1_rect.width) // 2, consts.globalMap[
+                    "screenHeight"] // 3
             screen.blit(gameover_text1, gameover_text1_rect)
 
             gameover_text2 = gameover_font.render(str(score), True, (255, 255, 255))
             gameover_text2_rect = gameover_text2.get_rect()
             gameover_text2_rect.left, gameover_text2_rect.top = \
-                (width - gameover_text2_rect.width) // 2, \
+                (consts.globalMap["screenWH"][0] - gameover_text2_rect.width) // 2, \
                 gameover_text1_rect.bottom + 10
             screen.blit(gameover_text2, gameover_text2_rect)
 
             again_rect.left, again_rect.top = \
-                (width - again_rect.width) // 2, \
+                (consts.globalMap["screenWH"][0] - again_rect.width) // 2, \
                 gameover_text2_rect.bottom + 50
             screen.blit(again_image, again_rect)
 
             gameover_rect.left, gameover_rect.top = \
-                (width - again_rect.width) // 2, \
+                (consts.globalMap["screenWH"][0] - again_rect.width) // 2, \
                 again_rect.bottom + 10
             screen.blit(gameover_image, gameover_rect)
 
@@ -591,7 +585,7 @@ def main():
 
         delay -= 1
         if not delay:
-            delay = 100
+            delay = consts.globalMap["delay"]
 
         pygame.display.flip()
         clock.tick(60)
@@ -603,7 +597,6 @@ if __name__ == '__main__':
 
     except SystemExit:
         pass
-
     except:
         traceback.print_exc()
         pygame.quit()
