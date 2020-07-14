@@ -8,7 +8,7 @@ class Bullet1(pygame.sprite.Sprite):
     def __init__(self, position):
         super(Bullet1, self).__init__()
 
-        self.image = pygame.image.load(consts.projectPath + "/images/bullet1.png").convert_alpha()
+        self.image = pygame.image.load(consts.globalMap["projectPath"] + "/images/bullet1.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
         self.speed = 12
@@ -31,7 +31,7 @@ class Bullet2(pygame.sprite.Sprite):
     def __init__(self, position):
         super(Bullet2, self).__init__()
 
-        self.image = pygame.image.load(consts.projectPath + "/images/bullet2.png").convert_alpha()
+        self.image = pygame.image.load(consts.globalMap["projectPath"] + "/images/bullet2.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = position
         self.speed = 14

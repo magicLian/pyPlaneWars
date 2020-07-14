@@ -7,14 +7,14 @@ class MyPlane(pygame.sprite.Sprite):
     def __init__(self, bg_size):
         super(MyPlane, self).__init__()
 
-        self.image1 = pygame.image.load(consts.projectPath + '/images/me1.png').convert_alpha()
-        self.image2 = pygame.image.load(consts.projectPath + '/images/me2.png').convert_alpha()
+        self.image1 = pygame.image.load(consts.globalMap["projectPath"] + '/images/me1.png').convert_alpha()
+        self.image2 = pygame.image.load(consts.globalMap["projectPath"] + '/images/me2.png').convert_alpha()
         self.destroy_images = []
         self.destroy_images.extend([
-            pygame.image.load(consts.projectPath + '/images/me_destroy_1.png').convert_alpha(),
-            pygame.image.load(consts.projectPath + '/images/me_destroy_2.png').convert_alpha(),
-            pygame.image.load(consts.projectPath + '/images/me_destroy_3.png').convert_alpha(),
-            pygame.image.load(consts.projectPath + '/images/me_destroy_4.png').convert_alpha()
+            pygame.image.load(consts.globalMap["projectPath"] + '/images/me_destroy_1.png').convert_alpha(),
+            pygame.image.load(consts.globalMap["projectPath"] + '/images/me_destroy_2.png').convert_alpha(),
+            pygame.image.load(consts.globalMap["projectPath"] + '/images/me_destroy_3.png').convert_alpha(),
+            pygame.image.load(consts.globalMap["projectPath"] + '/images/me_destroy_4.png').convert_alpha()
             ])
         self.rect = self.image1.get_rect()
         self.width, self.height = bg_size[0], bg_size[1]

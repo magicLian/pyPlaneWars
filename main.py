@@ -12,11 +12,11 @@ import consts
 pygame.init()
 pygame.mixer.init()
 
-bg_size = width, height = 480, 700
+bg_size = width, height = consts.globalMap["screenWidth"], consts.globalMap["screenHeight"]
 screen = pygame.display.set_mode(bg_size)
 pygame.display.set_caption('飞机大战 -- Demo')
 
-background = pygame.image.load(consts.projectPath + '/images/background.png').convert()
+background = pygame.image.load(consts.globalMap["projectPath"] + '/images/background.png').convert()
 
 # 定义颜色
 BLACK = (0, 0, 0)
@@ -25,40 +25,40 @@ RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 
 # 载入音乐
-pygame.mixer.music.load(consts.projectPath + '/sound/game_music.ogg')
+pygame.mixer.music.load(consts.globalMap["projectPath"] + '/sound/game_music.ogg')
 pygame.mixer.music.set_volume(0.2)
 
-bullet_sound = pygame.mixer.Sound(consts.projectPath + '/sound/bullet.wav')
+bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/bullet.wav')
 bullet_sound.set_volume(0.2)
 
-bomb_sound = pygame.mixer.Sound(consts.projectPath + '/sound/use_bomb.wav')
+bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/use_bomb.wav')
 bomb_sound.set_volume(0.2)
 
-supply_sound = pygame.mixer.Sound(consts.projectPath + '/sound/supply.wav')
+supply_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/supply.wav')
 supply_sound.set_volume(0.2)
 
-get_bomb_sound = pygame.mixer.Sound(consts.projectPath + '/sound/get_bomb.wav')
+get_bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bomb.wav')
 get_bomb_sound.set_volume(0.2)
 
-get_bullet_sound = pygame.mixer.Sound(consts.projectPath + '/sound/get_bullet.wav')
+get_bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bullet.wav')
 get_bullet_sound.set_volume(0.2)
 
-upgrade_sound = pygame.mixer.Sound(consts.projectPath + '/sound/upgrade.wav')
+upgrade_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/upgrade.wav')
 upgrade_sound.set_volume(0.2)
 
-enemy3_fly_sound = pygame.mixer.Sound(consts.projectPath + '/sound/enemy3_flying.wav')
+enemy3_fly_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_flying.wav')
 enemy3_fly_sound.set_volume(0.6)
 
-enemy1_down_sound = pygame.mixer.Sound(consts.projectPath + '/sound/enemy1_down.wav')
+enemy1_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy1_down.wav')
 enemy1_down_sound.set_volume(0.2)
 
-enemy2_down_sound = pygame.mixer.Sound(consts.projectPath + '/sound/enemy2_down.wav')
+enemy2_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy2_down.wav')
 enemy2_down_sound.set_volume(0.2)
 
-enemy3_down_sound = pygame.mixer.Sound(consts.projectPath + '/sound/enemy3_down.wav')
+enemy3_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_down.wav')
 enemy3_down_sound.set_volume(0.2)
 
-me_down_sound = pygame.mixer.Sound(consts.projectPath + '/sound/me_down.wav')
+me_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/me_down.wav')
 me_down_sound.set_volume(0.2)
 
 
@@ -133,18 +133,18 @@ def main():
 
     # 统计得分
     score = 0
-    score_font = pygame.font.Font(consts.projectPath + "/font/font.ttf", 36)
+    score_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", 36)
 
     # 标志是否暂停游戏
     paused = False
     paused_nor_image = pygame.image.load(
-        consts.projectPath + "/images/pause_nor.png").convert_alpha()
+        consts.globalMap["projectPath"] + "/images/pause_nor.png").convert_alpha()
     paused_pressed_image = pygame.image.load(
-        consts.projectPath + "/images/pause_pressed.png").convert_alpha()
+        consts.globalMap["projectPath"] + "/images/pause_pressed.png").convert_alpha()
     resume_nor_image = pygame.image.load(
-        consts.projectPath + '/images/resume_nor.png').convert_alpha()
+        consts.globalMap["projectPath"] + '/images/resume_nor.png').convert_alpha()
     resume_pressed_image = pygame.image.load(
-        consts.projectPath + '/images/resume_pressed.png').convert_alpha()
+        consts.globalMap["projectPath"] + '/images/resume_pressed.png').convert_alpha()
     paused_rect = paused_nor_image.get_rect()
     paused_rect.left, paused_rect.top = width - paused_rect.width - 10, 10
     paused_image = paused_nor_image
@@ -153,13 +153,13 @@ def main():
     level = 1
 
     # 全屏炸弹
-    bomb_image = pygame.image.load(consts.projectPath + '/images/bomb.png').convert_alpha()
+    bomb_image = pygame.image.load(consts.globalMap["projectPath"] + '/images/bomb.png').convert_alpha()
     bomb_rect = bomb_image.get_rect()
-    bomb_font = pygame.font.Font(consts.projectPath + "/font/font.ttf", 48)
+    bomb_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", 48)
     bomb_num = 3
 
     # 每30秒发放一个补给包
-    bullet_supply = supply.Bullet_Supply(bg_size)
+    bullet_supply = supply.BulletSupply(bg_size)
     bomb_supply = supply.Bomb_Supply(bg_size)
 
     SUPPLY_TIME = USEREVENT
@@ -175,7 +175,7 @@ def main():
     is_double_bullet = False
 
     # 生命数量
-    life_image = pygame.image.load(consts.projectPath + "/images/life.png").convert_alpha()
+    life_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/life.png").convert_alpha()
     life_rect = life_image.get_rect()
     life_num = 3
 
@@ -183,10 +183,10 @@ def main():
     switch_plane = True
 
     # 游戏结束画面
-    gameover_font = pygame.font.Font(consts.projectPath + "/font/font.TTF", 48)
-    again_image = pygame.image.load(consts.projectPath + "/images/again.png").convert_alpha()
+    gameover_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.TTF", 48)
+    again_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/again.png").convert_alpha()
     again_rect = again_image.get_rect()
-    gameover_image = pygame.image.load(consts.projectPath + "/images/gameover.png").convert_alpha()
+    gameover_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/gameover.png").convert_alpha()
     gameover_rect = gameover_image.get_rect()
 
     # 用于延迟切换
@@ -530,12 +530,12 @@ def main():
             if not recorded:
                 recorded = True
                 # 读取历史最高分
-                with open(consts.projectPath + '/record.txt', 'r') as f:
+                with open(consts.globalMap["projectPath"] + '/record.txt', 'r') as f:
                     record_score = int(f.read())
 
                 # 判断是否高于历史最高分
                 if score > record_score:
-                    with open(consts.projectPath + '/record.txt', 'w') as f:
+                    with open(consts.globalMap["projectPath"] + '/record.txt', 'w') as f:
                         f.write(str(score))
 
             # 绘制结束界面
