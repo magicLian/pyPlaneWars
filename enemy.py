@@ -24,7 +24,6 @@ class SmallEnemy(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.speed = 2
         self.reset()
-        self.energy = SmallEnemy.energy
         self.hit = False
 
     def move(self):
@@ -34,11 +33,13 @@ class SmallEnemy(pygame.sprite.Sprite):
             self.reset()
 
     def reset(self):
-        self.rect.left, self.rect.top = \
-            randint(0, self.width - self.rect.width), \
-            randint(-5 * self.height, 0)
+        self.rect.left = randint(0, self.width - self.rect.width)
+        self.rect.top = randint(-5 * self.height, 0)
         self.active = True
         self.energy = SmallEnemy.energy
+
+    def destroy(self):
+        self.active = False
 
 
 class MidEnemy(pygame.sprite.Sprite):
@@ -64,7 +65,6 @@ class MidEnemy(pygame.sprite.Sprite):
         self.speed = 1
         self.mask = pygame.mask.from_surface(self.image)
         self.reset()
-        self.energy = MidEnemy.energy
         self.hit = False
 
     def move(self):
@@ -74,11 +74,13 @@ class MidEnemy(pygame.sprite.Sprite):
             self.reset()
 
     def reset(self):
-        self.rect.left, self.rect.top = \
-            randint(0, self.width - self.rect.width), \
-            randint(-10 * self.height, -self.height)
+        self.rect.left = randint(0, self.width - self.rect.width)
+        self.rect.top = randint(-10 * self.height, -self.height)
         self.active = True
         self.energy = MidEnemy.energy
+
+    def destroy(self):
+        self.active = False
 
 
 class BigEnemy(pygame.sprite.Sprite):
@@ -107,7 +109,6 @@ class BigEnemy(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image1)
         self.appear = False
         self.reset()
-        self.energy = BigEnemy.energy
         self.hit = False
 
     def move(self):
@@ -117,8 +118,10 @@ class BigEnemy(pygame.sprite.Sprite):
             self.reset()
 
     def reset(self):
-        self.rect.left, self.rect.top = \
-            randint(0, self.width - self.rect.width), \
-            randint(-20 * self.height, -10 * self.height)
+        self.rect.left = randint(0, self.width - self.rect.width)
+        self.rect.top = randint(-20 * self.height, -10 * self.height)
         self.active = True
         self.energy = BigEnemy.energy
+
+    def destroy(self):
+        self.active = False
