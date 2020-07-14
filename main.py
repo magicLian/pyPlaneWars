@@ -5,28 +5,28 @@ import myplane
 import enemy
 import bullet
 import supply
-import consts
+from consts import GlobalVar
 from pygame.locals import *
 from random import *
 
 
 def add_small_enemies(group1, group2, num):
     for i in range(num):
-        e1 = enemy.SmallEnemy(consts.globalMap["screenWH"])
+        e1 = enemy.SmallEnemy((GlobalVar.SYSTEM_SCREEN_WIDTH,GlobalVar.SYSTEM_SCREEN_HEIGHT))
         group1.add(e1)
         group2.add(e1)
 
 
 def add_mid_enemies(group1, group2, num):
     for i in range(num):
-        e2 = enemy.MidEnemy(consts.globalMap["screenWH"])
+        e2 = enemy.MidEnemy((GlobalVar.SYSTEM_SCREEN_WIDTH,GlobalVar.SYSTEM_SCREEN_HEIGHT))
         group1.add(e2)
         group2.add(e2)
 
 
 def add_big_enemies(group1, group2, num):
     for i in range(num):
-        e3 = enemy.BigEnemy(consts.globalMap["screenWH"])
+        e3 = enemy.BigEnemy((GlobalVar.SYSTEM_SCREEN_WIDTH,GlobalVar.SYSTEM_SCREEN_HEIGHT))
         group1.add(e3)
         group2.add(e3)
 
@@ -40,53 +40,53 @@ def main():
     pygame.init()
     pygame.mixer.init()
 
-    screen = pygame.display.set_mode(consts.globalMap["screenWH"])
-    pygame.display.set_caption(consts.globalMap["gameName"])
+    screen = pygame.display.set_mode((GlobalVar.SYSTEM_SCREEN_WIDTH,GlobalVar.SYSTEM_SCREEN_HEIGHT))
+    pygame.display.set_caption(GlobalVar.SYSTEM_GAME_NAME)
 
-    background = pygame.image.load(consts.globalMap["projectPath"] + '/images/background.png').convert()
+    background = pygame.image.load(GlobalVar.PROJECT_PATH + '/images/background.png').convert()
 
     # 载入音乐
-    pygame.mixer.music.load(consts.globalMap["projectPath"] + '/sound/game_music.ogg')
-    pygame.mixer.music.set_volume(consts.globalMap["musicVol"])
+    pygame.mixer.music.load(GlobalVar.PROJECT_PATH + '/sound/game_music.ogg')
+    pygame.mixer.music.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/bullet.wav')
-    bullet_sound.set_volume(consts.globalMap["musicVol"])
+    bullet_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/bullet.wav')
+    bullet_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/use_bomb.wav')
-    bomb_sound.set_volume(consts.globalMap["musicVol"])
+    bomb_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/use_bomb.wav')
+    bomb_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    supply_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/supply.wav')
-    supply_sound.set_volume(consts.globalMap["musicVol"])
+    supply_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/supply.wav')
+    supply_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    get_bomb_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bomb.wav')
-    get_bomb_sound.set_volume(consts.globalMap["musicVol"])
+    get_bomb_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/get_bomb.wav')
+    get_bomb_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    get_bullet_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/get_bullet.wav')
-    get_bullet_sound.set_volume(consts.globalMap["musicVol"])
+    get_bullet_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/get_bullet.wav')
+    get_bullet_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    upgrade_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/upgrade.wav')
-    upgrade_sound.set_volume(consts.globalMap["musicVol"])
+    upgrade_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/upgrade.wav')
+    upgrade_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    enemy3_fly_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_flying.wav')
-    enemy3_fly_sound.set_volume(consts.globalMap["musicVol"])
+    enemy3_fly_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/enemy3_flying.wav')
+    enemy3_fly_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    enemy1_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy1_down.wav')
-    enemy1_down_sound.set_volume(consts.globalMap["musicVol"])
+    enemy1_down_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/enemy1_down.wav')
+    enemy1_down_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    enemy2_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy2_down.wav')
-    enemy2_down_sound.set_volume(consts.globalMap["musicVol"])
+    enemy2_down_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/enemy2_down.wav')
+    enemy2_down_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    enemy3_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/enemy3_down.wav')
-    enemy3_down_sound.set_volume(consts.globalMap["musicVol"])
+    enemy3_down_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/enemy3_down.wav')
+    enemy3_down_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
-    me_down_sound = pygame.mixer.Sound(consts.globalMap["projectPath"] + '/sound/me_down.wav')
-    me_down_sound.set_volume(consts.globalMap["musicVol"])
+    me_down_sound = pygame.mixer.Sound(GlobalVar.PROJECT_PATH + '/sound/me_down.wav')
+    me_down_sound.set_volume(GlobalVar.SYSTEM_MUSIC_VOL)
 
     # 播放音乐
     pygame.mixer.music.play(-1)
 
     # 实例我方飞机
-    me = myplane.MyPlane(consts.globalMap["screenWH"])
+    me = myplane.MyPlane()
 
     # 实例敌方飞机
     enemies = pygame.sprite.Group()
@@ -126,37 +126,37 @@ def main():
 
     # 统计得分
     score = 0
-    score_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", consts.globalMap["scoreFontSize"])
+    score_font = pygame.font.Font(GlobalVar.PROJECT_PATH + "/font/font.ttf", GlobalVar.FONT_SCORE_SIZE)
 
     # 标志是否暂停游戏
     paused = False
     paused_nor_image = pygame.image.load(
-        consts.globalMap["projectPath"] + "/images/pause_nor.png").convert_alpha()
+        GlobalVar.PROJECT_PATH + "/images/pause_nor.png").convert_alpha()
     paused_pressed_image = pygame.image.load(
-        consts.globalMap["projectPath"] + "/images/pause_pressed.png").convert_alpha()
+        GlobalVar.PROJECT_PATH + "/images/pause_pressed.png").convert_alpha()
     resume_nor_image = pygame.image.load(
-        consts.globalMap["projectPath"] + '/images/resume_nor.png').convert_alpha()
+        GlobalVar.PROJECT_PATH + '/images/resume_nor.png').convert_alpha()
     resume_pressed_image = pygame.image.load(
-        consts.globalMap["projectPath"] + '/images/resume_pressed.png').convert_alpha()
+        GlobalVar.PROJECT_PATH + '/images/resume_pressed.png').convert_alpha()
     paused_rect = paused_nor_image.get_rect()
-    paused_rect.left, paused_rect.top = consts.globalMap["screenWH"][0] - paused_rect.width - 10, 10
+    paused_rect.left, paused_rect.top = GlobalVar.SYSTEM_SCREEN_WIDTH - paused_rect.width - 10, 10
     paused_image = paused_nor_image
 
     # 设置难度
-    level = consts.LEVEL1
+    level = GlobalVar.LEVEL1
 
     # 全屏炸弹
-    bomb_image = pygame.image.load(consts.globalMap["projectPath"] + '/images/bomb.png').convert_alpha()
+    bomb_image = pygame.image.load(GlobalVar.PROJECT_PATH + '/images/bomb.png').convert_alpha()
     bomb_rect = bomb_image.get_rect()
-    bomb_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", consts.globalMap["bombFontSize"])
-    bomb_num = consts.globalMap["bombNum"]
+    bomb_font = pygame.font.Font(GlobalVar.PROJECT_PATH + "/font/font.ttf", GlobalVar.FONT_BOMB_SIZE)
+    bomb_num = GlobalVar.SYSTEM_BOMB_NUMBER
 
     # 每30秒发放一个补给包
-    bullet_supply = supply.BulletSupply((consts.globalMap["screenWH"][0], consts.globalMap["screenWH"][1]))
-    bomb_supply = supply.Bomb_Supply((consts.globalMap["screenWH"][0], consts.globalMap["screenWH"][1]))
+    bullet_supply = supply.BulletSupply((GlobalVar.SYSTEM_SCREEN_WIDTH, GlobalVar.SYSTEM_SCREEN_HEIGHT))
+    bomb_supply = supply.Bomb_Supply((GlobalVar.SYSTEM_SCREEN_WIDTH, GlobalVar.SYSTEM_SCREEN_HEIGHT))
 
     supply_time = USEREVENT
-    pygame.time.set_timer(supply_time, consts.globalMap["supplyTimer"])
+    pygame.time.set_timer(supply_time, GlobalVar.SYSTEM_SUPPLY_TIME)
 
     # 超级子弹定时器
     double_bullet_time = USEREVENT + 1
@@ -168,22 +168,22 @@ def main():
     is_double_bullet = False
 
     # 生命数量
-    life_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/life.png").convert_alpha()
+    life_image = pygame.image.load(GlobalVar.PROJECT_PATH + "/images/life.png").convert_alpha()
     life_rect = life_image.get_rect()
-    life_num = consts.globalMap["lifeNum"]
+    life_num = GlobalVar.SYSTEM_LIFE_NUMBER
 
     # 用于切换我方飞机图片
     switch_plane = True
 
     # 游戏结束画面
-    gameover_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.TTF", consts.globalMap["gameOverFontSize"])
-    again_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/again.png").convert_alpha()
+    gameover_font = pygame.font.Font(GlobalVar.PROJECT_PATH + "/font/font.TTF", GlobalVar.FONT_GAME_OVER_SIZE)
+    again_image = pygame.image.load(GlobalVar.PROJECT_PATH + "/images/again.png").convert_alpha()
     again_rect = again_image.get_rect()
-    gameover_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/gameover.png").convert_alpha()
+    gameover_image = pygame.image.load(GlobalVar.PROJECT_PATH + "/images/gameover.png").convert_alpha()
     gameover_rect = gameover_image.get_rect()
 
     # 用于延迟切换
-    delay = consts.globalMap["delay"]
+    delay = GlobalVar.SYSTEM_DELAY
 
     # 限制打开一次记录文件
     recorded = False
@@ -205,7 +205,7 @@ def main():
                         pygame.mixer.music.pause()
                         pygame.mixer.pause()
                     else:
-                        pygame.time.set_timer(supply_time, consts.globalMap["supplyTimer"])
+                        pygame.time.set_timer(supply_time, GlobalVar.SYSTEM_SUPPLY_TIME)
                         pygame.mixer.music.unpause()
                         pygame.mixer.unpause()
 
@@ -244,8 +244,8 @@ def main():
                 pygame.time.set_timer(invincible_time, 0)
 
         # 根据用户得分增加难度
-        if level == consts.LEVEL1 and score > 50000:
-            level = consts.LEVEL2
+        if level == GlobalVar.LEVEL1 and score > 50000:
+            level = GlobalVar.LEVEL2
             upgrade_sound.play()
             # 增加3架小型敌机, 2架中型敌机和1架大型敌机
             add_small_enemies(small_enemies, enemies, 3)
@@ -255,8 +255,8 @@ def main():
             # 提升小型敌机的速度
             inc_speed(target=small_enemies, inc=1)
 
-        elif level == consts.LEVEL2 and score > 300000:
-            level = consts.LEVEL3
+        elif level == GlobalVar.LEVEL2 and score > 300000:
+            level = GlobalVar.LEVEL3
             upgrade_sound.play()
             # 增加5架小型敌机, 3架中型敌机和2架大型敌机
             add_small_enemies(small_enemies, enemies, 5)
@@ -267,8 +267,8 @@ def main():
             inc_speed(target=small_enemies, inc=1)
             inc_speed(target=mid_enemies, inc=1)
 
-        elif level == consts.LEVEL3 and score > 600000:
-            level = consts.LEVEL4
+        elif level == GlobalVar.LEVEL3 and score > 600000:
+            level = GlobalVar.LEVEL4
             upgrade_sound.play()
             # 增加5架小型敌机, 3架中型敌机和2架大型敌机
             add_small_enemies(small_enemies, enemies, 5)
@@ -279,8 +279,8 @@ def main():
             inc_speed(target=small_enemies, inc=1)
             inc_speed(target=mid_enemies, inc=1)
 
-        elif level == consts.LEVEL4 and score > 1000000:
-            level = consts.LEVEL5
+        elif level == GlobalVar.LEVEL4 and score > 1000000:
+            level = GlobalVar.LEVEL5
             upgrade_sound.play()
             # 增加5架小型敌机, 3架中型敌机和2架大型敌机
             add_small_enemies(small_enemies, enemies, 5)
@@ -372,7 +372,7 @@ def main():
                             screen.blit(each.image2, each.rect)
 
                     # 绘制血槽
-                    pygame.draw.line(screen, consts.BLACK,
+                    pygame.draw.line(screen, GlobalVar.BLACK,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.right, each.rect.top - 5),
                                      2)
@@ -380,9 +380,9 @@ def main():
                     # 当生命大于20%显示绿色, 否则显示红色
                     energy_remain = each.energy / enemy.BigEnemy.energy
                     if energy_remain > 0.2:
-                        energy_color = consts.GREEN
+                        energy_color = GlobalVar.GREEN
                     else:
-                        energy_color = consts.RED
+                        energy_color = GlobalVar.RED
                     pygame.draw.line(screen, energy_color,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.left + each.rect.width * energy_remain,
@@ -421,7 +421,7 @@ def main():
                         screen.blit(each.image, each.rect)
 
                     # 绘制血槽
-                    pygame.draw.line(screen, consts.BLACK,
+                    pygame.draw.line(screen, GlobalVar.BLACK,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.right, each.rect.top - 5),
                                      2)
@@ -429,9 +429,9 @@ def main():
                     # 当生命大于20%显示绿色, 否则显示红色
                     energy_remain = each.energy / enemy.MidEnemy.energy
                     if energy_remain > 0.2:
-                        energy_color = consts.GREEN
+                        energy_color = GlobalVar.GREEN
                     else:
-                        energy_color = consts.RED
+                        energy_color = GlobalVar.RED
                     pygame.draw.line(screen, energy_color,
                                      (each.rect.left, each.rect.top - 5),
                                      (each.rect.left + each.rect.width * energy_remain,
@@ -493,20 +493,20 @@ def main():
                         pygame.time.set_timer(invincible_time, 3 * 1000)
 
             # 绘制全屏炸弹数量
-            bomb_text = bomb_font.render("× %d" % bomb_num, True, consts.WHITE)
+            bomb_text = bomb_font.render("× %d" % bomb_num, True, GlobalVar.WHITE)
             text_rect = bomb_text.get_rect()
-            screen.blit(bomb_image, (10, consts.globalMap["screenWH"][1] - 10 - bomb_rect.height))
+            screen.blit(bomb_image, (10, GlobalVar.SYSTEM_SCREEN_HEIGHT - 10 - bomb_rect.height))
             screen.blit(bomb_text, (20 + bomb_rect.width,
-                                    consts.globalMap["screenWH"][1] - 5 - text_rect.height))
+                                    GlobalVar.SYSTEM_SCREEN_HEIGHT - 5 - text_rect.height))
 
             # 绘制剩余生命数量
             if life_num:
                 for i in range(life_num):
                     screen.blit(life_image,
-                                ((consts.globalMap["screenWH"][0] - 10 - (i + 1) * life_rect.width),
-                                 consts.globalMap["screenWH"][1] - 10 - life_rect.height))
+                                ((GlobalVar.SYSTEM_SCREEN_WIDTH - 10 - (i + 1) * life_rect.width),
+                                 GlobalVar.SYSTEM_SCREEN_HEIGHT - 10 - life_rect.height))
             # 绘制得分
-            score_text = score_font.render('Score : %d' % score, True, consts.WHITE)
+            score_text = score_font.render('Score : %d' % score, True, GlobalVar.WHITE)
             screen.blit(score_text, (10, 5))
 
         #  绘制游戏结束画面
@@ -523,12 +523,12 @@ def main():
             if not recorded:
                 recorded = True
                 # 读取历史最高分
-                with open(consts.globalMap["projectPath"] + '/record.txt', 'r') as f:
+                with open(GlobalVar.PROJECT_PATH + '/record.txt', 'r') as f:
                     record_score = int(f.read())
 
                 # 判断是否高于历史最高分
                 if score > record_score:
-                    with open(consts.globalMap["projectPath"] + '/record.txt', 'w') as f:
+                    with open(GlobalVar.PROJECT_PATH + '/record.txt', 'w') as f:
                         f.write(str(score))
 
             # 绘制结束界面
@@ -538,24 +538,24 @@ def main():
             gameover_text1 = gameover_font.render("Your Score", True, (255, 255, 255))
             gameover_text1_rect = gameover_text1.get_rect()
             gameover_text1_rect.left, gameover_text1_rect.top = \
-                (consts.globalMap["screenWH"][0] - gameover_text1_rect.width) // 2, consts.globalMap[
-                    "screenHeight"] // 3
+                (GlobalVar.SYSTEM_SCREEN_WIDTH - gameover_text1_rect.width) // 2, \
+                GlobalVar.SYSTEM_SCREEN_HEIGHT // 3
             screen.blit(gameover_text1, gameover_text1_rect)
 
             gameover_text2 = gameover_font.render(str(score), True, (255, 255, 255))
             gameover_text2_rect = gameover_text2.get_rect()
             gameover_text2_rect.left, gameover_text2_rect.top = \
-                (consts.globalMap["screenWH"][0] - gameover_text2_rect.width) // 2, \
+                (GlobalVar.SYSTEM_SCREEN_WIDTH - gameover_text2_rect.width) // 2, \
                 gameover_text1_rect.bottom + 10
             screen.blit(gameover_text2, gameover_text2_rect)
 
             again_rect.left, again_rect.top = \
-                (consts.globalMap["screenWH"][0] - again_rect.width) // 2, \
+                (GlobalVar.SYSTEM_SCREEN_WIDTH - again_rect.width) // 2, \
                 gameover_text2_rect.bottom + 50
             screen.blit(again_image, again_rect)
 
             gameover_rect.left, gameover_rect.top = \
-                (consts.globalMap["screenWH"][0] - again_rect.width) // 2, \
+                (GlobalVar.SYSTEM_SCREEN_WIDTH - again_rect.width) // 2, \
                 again_rect.bottom + 10
             screen.blit(gameover_image, gameover_rect)
 
@@ -585,7 +585,7 @@ def main():
 
         delay -= 1
         if not delay:
-            delay = consts.globalMap["delay"]
+            delay = GlobalVar.SYSTEM_DELAY
 
         pygame.display.flip()
         clock.tick(60)

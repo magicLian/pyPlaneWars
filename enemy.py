@@ -1,6 +1,6 @@
 import pygame
 from random import *
-import consts
+from consts import GlobalVar
 
 
 class SmallEnemy(pygame.sprite.Sprite):
@@ -10,13 +10,18 @@ class SmallEnemy(pygame.sprite.Sprite):
     def __init__(self, bg_size):
         super(SmallEnemy, self).__init__()
 
-        self.image = pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy1.png').convert_alpha()
+        self.image = pygame.image.load(GlobalVar.PROJECT_PATH
+                                       + '/images/enemy1.png').convert_alpha()
         self.destroy_images = []
         self.destroy_images.extend([
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy1_down1.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy1_down2.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy1_down3.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy1_down4.png').convert_alpha()
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy1_down1.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy1_down2.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy1_down3.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy1_down4.png').convert_alpha()
         ])
         self.rect = self.image.get_rect()
         self.width, self.height = bg_size[0], bg_size[1]
@@ -50,15 +55,21 @@ class MidEnemy(pygame.sprite.Sprite):
     def __init__(self, bg_size):
         super(MidEnemy, self).__init__()
 
-        self.image = pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy2.png').convert_alpha()
+        self.image = pygame.image.load(GlobalVar.PROJECT_PATH
+                                       + '/images/enemy2.png').convert_alpha()
         self.destroy_images = []
         self.destroy_images.extend([
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy2_down1.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy2_down2.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy2_down3.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy2_down4.png').convert_alpha()
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy2_down1.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy2_down2.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy2_down3.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy2_down4.png').convert_alpha()
         ])
-        self.image_hit = pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy2_hit.png').convert_alpha()
+        self.image_hit = pygame.image.load(GlobalVar.PROJECT_PATH
+                                           + '/images/enemy2_hit.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.width, self.height = bg_size[0], bg_size[1]
         self.active = True
@@ -90,18 +101,27 @@ class BigEnemy(pygame.sprite.Sprite):
     def __init__(self, bg_size):
         super(BigEnemy, self).__init__()
 
-        self.image1 = pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_n1.png').convert_alpha()
-        self.image2 = pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_n2.png').convert_alpha()
+        self.image1 = pygame.image.load(GlobalVar.PROJECT_PATH
+                                        + '/images/enemy3_n1.png').convert_alpha()
+        self.image2 = pygame.image.load(GlobalVar.PROJECT_PATH
+                                        + '/images/enemy3_n2.png').convert_alpha()
         self.destroy_images = []
         self.destroy_images.extend([
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_down1.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_down2.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_down3.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_down4.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_down5.png').convert_alpha(),
-            pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_down6.png').convert_alpha()
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy3_down1.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy3_down2.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy3_down3.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy3_down4.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy3_down5.png').convert_alpha(),
+            pygame.image.load(GlobalVar.PROJECT_PATH
+                              + '/images/enemy3_down6.png').convert_alpha()
         ])
-        self.image_hit = pygame.image.load(consts.globalMap["projectPath"] + '/images/enemy3_hit.png').convert_alpha()
+        self.image_hit = pygame.image.load(GlobalVar.PROJECT_PATH
+                                           + '/images/enemy3_hit.png').convert_alpha()
         self.rect = self.image1.get_rect()
         self.width, self.height = bg_size[0], bg_size[1]
         self.active = True

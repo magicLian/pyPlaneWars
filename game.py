@@ -58,7 +58,7 @@ class Game(None):
         pygame.mixer.music.play(-1)
 
         # 实例我方飞机
-        self.me = myplane.MyPlane(consts.globalMap["screenWH"])
+        self.me = myplane.MyPlane()
 
         # 实例敌方飞机
         self.enemies = pygame.sprite.Group()
