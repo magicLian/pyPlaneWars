@@ -98,7 +98,8 @@ class Game(None):
 
         # 统计得分
         self.score = 0
-        self.score_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", consts.globalMap["scoreFontSize"])
+        self.score_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf",
+                                           consts.globalMap["scoreFontSize"])
 
         # 标志是否暂停游戏
         self.paused = False
@@ -120,8 +121,7 @@ class Game(None):
         # 全屏炸弹
         self.bomb_image = pygame.image.load(consts.globalMap["projectPath"] + '/images/bomb.png').convert_alpha()
         self.bomb_rect = self.bomb_image.get_rect()
-        self.bomb_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf",
-                                     consts.globalMap["bombFontSize"])
+        self.bomb_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.ttf", consts.globalMap["bombFontSize"])
         self.bomb_num = consts.globalMap["bombNum"]
 
         # 每30秒发放一个补给包
@@ -149,7 +149,8 @@ class Game(None):
         self.switch_plane = True
 
         # 游戏结束画面
-        self.gameover_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.TTF",consts.globalMap["gameOverFontSize"])
+        self.gameover_font = pygame.font.Font(consts.globalMap["projectPath"] + "/font/font.TTF",
+                                              consts.globalMap["gameOverFontSize"])
         self.again_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/again.png").convert_alpha()
         self.again_rect = self.again_image.get_rect()
         self.gameover_image = pygame.image.load(consts.globalMap["projectPath"] + "/images/gameover.png").convert_alpha()
