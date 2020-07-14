@@ -176,7 +176,7 @@ class Game(None):
             self.enemies.add(e2)
             self.mid_enemies.add(e2)
 
-    def add_big_enemies(self,num):
+    def add_big_enemies(self, num):
         for i in range(num):
             e3 = enemy.BigEnemy(consts.globalMap["screenWH"])
             self.enemies.add(e3)
@@ -185,7 +185,7 @@ class Game(None):
     def init_game(self, screen):
         pass
 
-    def license_event(self):
+    def listen_event(self):
         pass
 
     def end_game(self):
