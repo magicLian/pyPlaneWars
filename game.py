@@ -5,7 +5,6 @@ import myplane
 import enemy
 import bullet
 import supply
-
 from consts import GlobalVar
 
 
@@ -149,7 +148,7 @@ class Game():
 
         # 每30秒发放一个补给包
         self.bullet_supply = supply.BulletSupply()
-        self.bomb_supply = supply.Bomb_Supply()
+        self.bomb_supply = supply.BombSupply()
 
         self.supply_time = USEREVENT
         pygame.time.set_timer(self.supply_time, GlobalVar.SYSTEM_SUPPLY_TIME)

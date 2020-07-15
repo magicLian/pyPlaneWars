@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Author   : Sdite
-# @DateTime : 2017-07-26 17:56:37
 
 import pygame
 from random import *
@@ -32,11 +30,11 @@ class BulletSupply(pygame.sprite.Sprite):
         self.rect.bottom = -100
 
 
-class Bomb_Supply(pygame.sprite.Sprite):
+class BombSupply(pygame.sprite.Sprite):
     """docstring for Bomb_Supply"""
 
     def __init__(self):
-        super(Bomb_Supply, self).__init__()
+        super(BombSupply, self).__init__()
 
         self.image = pygame.image.load(GlobalVar.PROJECT_PATH + '/images/bomb_supply.png').convert_alpha()
         self.rect = self.image.get_rect()

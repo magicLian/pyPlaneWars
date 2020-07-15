@@ -26,7 +26,7 @@ class GlobalVar():
     FONT_BOMB_SIZE = 48
     FONT_GAME_OVER_SIZE = 48
 
-    SYSTEM_GAME_NAME= "pyPlaneWars"
+    SYSTEM_GAME_NAME = "pyPlaneWars"
     SYSTEM_SCREEN_WIDTH = 480
     SYSTEM_SCREEN_HEIGHT = 700
     SYSTEM_MUSIC_VOL = 0.2
