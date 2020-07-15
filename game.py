@@ -1,13 +1,15 @@
 import pygame
 from pygame.locals import *
+import sys
 import myplane
 import enemy
 import bullet
 import supply
+
 from consts import GlobalVar
 
 
-class Game(None):
+class Game():
     def init_game(self):
         pygame.init()
         pygame.mixer.init()
@@ -114,15 +116,15 @@ class Game(None):
         self.bullet_normal_index = 0
         self.bullet_normal_num = GlobalVar.BULLET_NORMAL_NUMBER
         for i in range(self.bullet_normal_num):
-            self.bullet_normal.append(self.bullet.Bullet1(self.me.rect.midtop))
+            self.bullet_normal.append(bullet.Bullet1(self.me.rect.midtop))
 
         # 实例超级子弹
         self.bullet_super = []
         self.bullet_super_index = 0
         self.bullet_super_num = GlobalVar.BULLET_SUPER_NUMBER
         for i in range(self.bullet_super_num // 2):
-            self.bullet_super.append(self.bullet.Bullet2((self.me.rect.centerx - 33, self.me.rect.centery)))
-            self.bullet_super.append(self.bullet.Bullet2((self.me.rect.centerx + 30, self.me.rect.centery)))
+            self.bullet_super.append(bullet.Bullet2((self.me.rect.centerx - 33, self.me.rect.centery)))
+            self.bullet_super.append(bullet.Bullet2((self.me.rect.centerx + 30, self.me.rect.centery)))
 
         # 中弹图片索引
         self.e1_destroy_index = 0
@@ -148,8 +150,8 @@ class Game(None):
         self.bomb_num = GlobalVar.SYSTEM_BOMB_NUMBER
 
         # 每30秒发放一个补给包
-        self.bullet_supply = supply.BulletSupply((GlobalVar.SYSTEM_SCREEN_WIDTH, GlobalVar.SYSTEM_SCREEN_HEIGHT))
-        self.bomb_supply = supply.Bomb_Supply((GlobalVar.SYSTEM_SCREEN_WIDTH, GlobalVar.SYSTEM_SCREEN_HEIGHT))
+        self.bullet_supply = supply.BulletSupply()
+        self.bomb_supply = supply.Bomb_Supply()
 
         self.supply_time = USEREVENT
         pygame.time.set_timer(self.supply_time, GlobalVar.SYSTEM_SUPPLY_TIME)
@@ -185,7 +187,7 @@ class Game(None):
 
 
     def process_game(self):
-        while running:
+        while self.running:
             self.listen_event()
             self.change_difficult_level()
 
@@ -357,7 +359,7 @@ class Game(None):
                         self.e3_destroy_index = (self.e3_destroy_index + 1) % 6
                         if self.e3_destroy_index == 0:
                             self.enemy3_fly_sound.stop()
-                            self.score += 10000
+                            self.score += GlobalVar.SYSTEM_POINT_E3
                             each.reset()
 
             # 绘制敌方中型机
@@ -396,7 +398,7 @@ class Game(None):
                                              self.e2_destroy_index], each.rect)
                         self.e2_destroy_index = (self.e2_destroy_index + 1) % 4
                         if self.e2_destroy_index == 0:
-                            self.score += 6000
+                            self.score += GlobalVar.SYSTEM_POINT_E2
                             each.reset()
 
             # 绘制敌方小型机
@@ -413,7 +415,7 @@ class Game(None):
                                              self.e1_destroy_index], each.rect)
                         self.e1_destroy_index = (self.e1_destroy_index + 1) % 4
                         if self.e1_destroy_index == 0:
-                            self.score += 1000
+                            self.score += GlobalVar.SYSTEM_POINT_E1
                             each.reset()
 
             # 检测我方飞机碰撞
@@ -443,7 +445,7 @@ class Game(None):
                         pygame.time.set_timer(self.invincible_time, 3 * 1000)
 
             # 绘制全屏炸弹数量
-            bomb_text = bomb_font.render("× %d" % self.bomb_num, True, GlobalVar.WHITE)
+            bomb_text = self.bomb_font.render("× %d" % self.bomb_num, True, GlobalVar.WHITE)
             text_rect = bomb_text.get_rect()
             self.screen.blit(self.bomb_image, (10, GlobalVar.SYSTEM_SCREEN_HEIGHT - 10 - self.bomb_rect.height))
             self.screen.blit(bomb_text, (20 + self.bomb_rect.width,
