@@ -36,8 +36,4 @@
 
 ## 3. 打包
 
-    pyinstaller -F  main.py  
-    
-   or  
-    
     pyinstaller -F main.spec
