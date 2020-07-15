@@ -20,7 +20,6 @@ class Game():
 
         self.process_game()
 
-
     def init_game_resources(self):
         self.screen = pygame.display.set_mode((GlobalVar.SYSTEM_SCREEN_WIDTH, GlobalVar.SYSTEM_SCREEN_HEIGHT))
 
@@ -90,7 +89,6 @@ class Game():
         self.gameover_font = pygame.font.Font(GlobalVar.PROJECT_PATH + "/font/font.TTF", GlobalVar.FONT_GAME_OVER_SIZE)
         self.again_image = pygame.image.load(GlobalVar.PROJECT_PATH + "/images/again.png").convert_alpha()
         self.gameover_image = pygame.image.load(GlobalVar.PROJECT_PATH + "/images/gameover.png").convert_alpha()
-
 
     def define_game_vars(self):
         # 实例我方飞机
@@ -184,7 +182,6 @@ class Game():
 
         self.clock = pygame.time.Clock()
         self.running = True
-
 
     def process_game(self):
         while self.running:
@@ -522,7 +519,6 @@ class Game():
             inc_speed(target=self.small_enemies, inc=1)
             inc_speed(target=self.mid_enemies, inc=1)
             inc_speed(target=self.big_enemies, inc=1)
-
 
     def pause_game(self):
         pass
